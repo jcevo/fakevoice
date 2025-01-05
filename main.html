@@ -32,78 +32,127 @@
 
     <title>jimakuChan：音声認識字幕ちゃん</title>
 
-    <style type="text/css">
-        button, input, select, textarea {
-            /* font-family : inherit; */
-            /* font-family: 'メイリオ', Meiryo,sans-serif; */
-            /* font-size   : 300%; */
-            /* color  : black; */
-            font-weight : 0;
-            /*text-align  : center;       /* left, center, right */
-            vertical-align : top;    /* top, middle, bottom */
-            -webkit-text-stroke-color: rgb(21, 0, 141);
-            -webkit-text-stroke-width: 0px;
-        }
+   <!-- 在main.html的head标签中的style部分应该这样更新 -->
+<style type="text/css">
+    button, input, select, textarea {
+        vertical-align: top;
+        -webkit-text-stroke-color: rgb(21, 0, 141);
+        -webkit-text-stroke-width: 0px;
+    }
 
-        html {
-            height: 100%;
-            width: 100%;
-        }
+    html {
+        height: 100%;
+        width: 100%;
+    }
 
-        body {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            overflow:hidden;
-            font-family: 'M PLUS Rounded 1c', sans-serif;
-            /* font-family:'07NikumaruFont'; */
-        }
-        table {
-            width: 100%;
-            overflow:hidden;
-            /* table-layout: fixed; */
-        }
-        table.btm_table {
-            position:absolute;
-            /* bottom:0; */
-        }
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+    }
 
-        table td {
-            /*word-break: break-all;*/
-            overflow-wrap : break-word;
-        }
-    </style>
+    /* 移除原来的表格相关样式，因为我们不再使用表格布局 */
 
-    <style>
-        /* prepare the selectors to add a stroke to */
+    /* 保留并修改描边样式 */
+    .stroke-single-imb {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
 
-        .stroke-single-imb{
-            /* position: absolute; */
-            left: 0;
-            right: 0;
-            margin: 0;
-            margin-left: 5px;
-            /* -webkit-text-stroke: 0px #0000FF;  */
-        }
+    .stroke-single-bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
 
-        .stroke-single-bg{
-            position: absolute;
-            left: 0;
-            right: 0;
-            margin: auto;
-            margin-left: 5px;
-            /* -webkit-text-stroke: 3px #FF0000;  */
-        }
-        /* add a single stroke */
-        .stroke-single-fg{
-            position: absolute;
-            left: 0;
-            right: 0;
-            margin: auto;
-            margin-left: 5px;
-            /* -webkit-text-stroke: 0px #FFFFFF; */
-        }
-    </style>
+    .stroke-single-fg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+
+    
+    /* 横向布局样式 */
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    table.btm_table {
+        position: absolute;
+        width: 100%;
+    }
+
+    table td {
+        overflow-wrap: break-word;
+    }
+
+ /* 竖向布局样式 */
+ .text-container {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vertical-text-group {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 2em;
+        height: 100%;
+        padding: 20px;
+    }
+
+    .vertical-text {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        white-space: nowrap;
+        position: relative;
+        height: 100%;
+    }
+
+    /* 通用样式 */
+    .stroke-single-imb {
+        left: 0;
+        right: 0;
+        margin: 0;
+    }
+
+    .stroke-single-bg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .stroke-single-fg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    /* 垂直模式特殊样式 */
+    .vertical-mode .stroke-single-bg,
+    .vertical-mode .stroke-single-fg,
+    .vertical-mode .stroke-single-imb {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+</style>
 
     <script>
 
@@ -120,6 +169,20 @@
 
         // 一定時間変化がなかったら消す ------------------------------------
         var fn_del = function() {
+            if(textDirection === 'vertical') {
+            document.getElementById('speech_text_v-imb').innerHTML = '';
+            document.getElementById('speech_text_v-bg').innerHTML = '';
+            document.getElementById('speech_text_v-fg').innerHTML = '';
+            document.getElementById('trans_text_v-imb').innerHTML = '';
+            document.getElementById('trans_text_v-bg').innerHTML = '';
+            document.getElementById('trans_text_v-fg').innerHTML = '';
+            document.getElementById('trans_text2_v-imb').innerHTML = '';
+            document.getElementById('trans_text2_v-bg').innerHTML = '';
+            document.getElementById('trans_text2_v-fg').innerHTML = '';
+            document.getElementById('trans_text3_v-imb').innerHTML = '';
+            document.getElementById('trans_text3_v-bg').innerHTML = '';
+            document.getElementById('trans_text3_v-fg').innerHTML = '';
+        } else {
             document.getElementById('speech_text-imb').innerHTML = '';
             document.getElementById('speech_text-bg').innerHTML = '';
             document.getElementById('speech_text-fg').innerHTML = '';
@@ -132,6 +195,7 @@
             document.getElementById('trans_text3-imb').innerHTML = '';
             document.getElementById('trans_text3-bg').innerHTML = '';
             document.getElementById('trans_text3-fg').innerHTML = '';
+        }
 
             // 各フラグをリセット
             isSpeechRecognitionComplete = false;
@@ -350,10 +414,18 @@
                 // 認識最終結果が来たら ###############################################
                 if (results[i].isFinal)
                 {
-                    // 認識結果を表示する ---------------------
+                    // 更新两种布局中的文本
+                if(textDirection === 'vertical') {
+                    document.getElementById('speech_text_v-imb').innerHTML = recog_text;
+                    document.getElementById('speech_text_v-bg').innerHTML = recog_text;
+                    document.getElementById('speech_text_v-fg').innerHTML = recog_text;
+                } else {
                     document.getElementById('speech_text-imb').innerHTML = recog_text;
                     document.getElementById('speech_text-bg').innerHTML = recog_text;
                     document.getElementById('speech_text-fg').innerHTML = recog_text;
+                }
+
+                  
                     isSpeechRecognitionComplete = true; // フラグを更新
 
                     // すべての処理が完了した後に内容を消す
@@ -513,9 +585,15 @@
 
                     // 画面表示テキスト更新 ---
                     if(recog_IM_text != ""){
-                        document.getElementById('speech_text-imb').innerHTML = "<< " + recog_IM_text + " >>";
-                        document.getElementById('speech_text-bg').innerHTML = "<< " + recog_IM_text + " >>";
-                        document.getElementById('speech_text-fg').innerHTML = "<< " + recog_IM_text + " >>";
+                        if(textDirection === 'vertical') {
+                    document.getElementById('speech_text_v-imb').innerHTML = "<< " + recog_text + " >>";
+                    document.getElementById('speech_text_v-bg').innerHTML = "<< " + recog_text + " >>";
+                    document.getElementById('speech_text_v-fg').innerHTML = "<< " + recog_text + " >>";
+                } else {
+                    document.getElementById('speech_text-imb').innerHTML = "<< " + recog_text + " >>";
+                    document.getElementById('speech_text-bg').innerHTML = "<< " + recog_text + " >>";
+                    document.getElementById('speech_text-fg').innerHTML = "<< " + recog_text + " >>";
+                }
                     }
 
                 }
@@ -534,8 +612,39 @@
 
 
 <body>
+    
     <div class="big" id="result_text">
-        <table id="text_table" class="btm_table" style="overflow:hidden;">
+        <!-- 垂直布局 -->
+        <div id="vertical_layout" class="text-container vertical-mode" style="display: none;">
+            <div class="vertical-text-group">
+                <div id="speech_text_v" class="vertical-text">
+                    <div class="stroke-single-bg" id="speech_text_v-bg"></div> 
+                    <div class="stroke-single-fg" id="speech_text_v-fg"></div>
+                    <div class="stroke-single-imb" id="speech_text_v-imb"></div> 
+                </div>
+
+                <div id="trans_text_v" class="vertical-text">
+                    <div class="stroke-single-bg" id="trans_text_v-bg"></div>  
+                    <div class="stroke-single-fg" id="trans_text_v-fg"></div>  
+                    <div class="stroke-single-imb" id="trans_text_v-imb"></div>  
+                </div>
+
+                <div id="trans_text2_v" class="vertical-text">
+                    <div class="stroke-single-bg" id="trans_text2_v-bg"></div>  
+                    <div class="stroke-single-fg" id="trans_text2_v-fg"></div>  
+                    <div class="stroke-single-imb" id="trans_text2_v-imb"></div>  
+                </div>
+
+                <div id="trans_text3_v" class="vertical-text">
+                    <div class="stroke-single-bg" id="trans_text3_v-bg"></div>  
+                    <div class="stroke-single-fg" id="trans_text3_v-fg"></div>  
+                    <div class="stroke-single-imb" id="trans_text3_v-imb"></div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- 水平布局 -->
+        <table id="horizontal_layout" class="btm_table" style="display: none;">
             <tr><td id="tbl_td" align="center" valign='bottom'>
                 <div id="speech_text">
                     <div class="stroke-single-bg" id="speech_text-bg"></div> 
@@ -579,6 +688,18 @@
 
 <!-- ############## 末尾のjavascript ############## -->
 <script type="text/javascript">
+var textDirection = getParam('textDirection') || 'vertical';
+const verticalLayout = document.getElementById('vertical_layout');
+    const horizontalLayout = document.getElementById('horizontal_layout');
+
+     // 设置布局显示
+     if(textDirection === 'vertical') {
+        verticalLayout.style.display = 'flex';
+        horizontalLayout.style.display = 'none';
+    } else {
+        verticalLayout.style.display = 'none';
+        horizontalLayout.style.display = 'table';
+    }
 
 // バージョン情報の表示 ---------------------------------
 const SoftwareTitle = "音声認識字幕ちゃん";
@@ -604,7 +725,6 @@ const trans3_text_first = "[ここに結果表示（翻訳３）]";
 document.getElementById('trans_text3-bg').innerHTML = trans3_text_first;
 document.getElementById('trans_text3-fg').innerHTML = trans3_text_first;
 document.getElementById('trans_text3-imb').innerHTML = trans3_text_first;
-
 
 // 対象言語を利用しない場合，初期表示文の削除 /////
 if (getParam('trans') == null) {
@@ -795,6 +915,15 @@ if (getParam('st_width4') != null){
 </script>
 
 
-
+<script>
+    // 根据方向显示对应的布局
+    if(textDirection === 'vertical') {
+        document.querySelector('.text-container').style.display = 'flex';
+        document.querySelector('.btm_table').style.display = 'none';
+    } else {
+        document.querySelector('.text-container').style.display = 'none';
+        document.querySelector('.btm_table').style.display = 'table';
+    }
+    </script>
 
 </html>
