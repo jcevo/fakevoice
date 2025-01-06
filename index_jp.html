@@ -29,7 +29,7 @@
     </script>
     <!-- END: Google tag (gtag.js) -->
 
-    <title>jimakuChan: 音声認識字幕ちゃん [CONFIG]</title>
+    <title>字幕</title>
 
     <style type="text/css">
         button, input, select, textarea {
@@ -108,7 +108,7 @@
 <!-- <iframe src="" name="sample" width="100%" height="30%" id="asr_frame" onclick="toggleIframeHeight()"></iframe> -->
 <iframe src="" name="sample" width="100%" height="30%" id="asr_frame"></iframe>
 
-　上の画面をクリックすると設定画面が閉じ，もう一度押すと再度開きます．<BR>
+　点击上面的画面会关闭设置画面，再次点击则会重新打开。<BR>
 <HR>
 
 <!-- # 設定セーブ＆ロードボタン ################## -->
@@ -191,6 +191,10 @@
 <BR>
 
 <HR>
+<select id="textDirection" onchange="updateOptionValues()">
+        <option value="vertical" selected>纵向排列</option>
+        <option value="horizontal">横向排列</option>
+</select>
 <!-- # テキストの揃え ######################### -->
 テキストの位置：　
 左右：
@@ -536,7 +540,7 @@
 
 
     // config 値　一覧 ////////////////
-    config_values = ["gas_key", "textAlign", "v_align", "whiteSpace", "bgcolor", "frame_height"
+    config_values = ["gas_key", "textDirection","textAlign", "v_align", "whiteSpace", "bgcolor", "frame_height"
         , "recog", "size1", "weight1", "color1", "st_color1", "st_width1"
         , "trans", "size2", "weight2", "color2", "st_color2", "st_width2"
         , "trans2", "size3", "weight3", "color3", "st_color3", "st_width3"
@@ -553,6 +557,9 @@
 
     // 設定の復元 ////////////////////
     const config = JSON.parse(localStorage.jimakuChan_config || '{}');
+    if(config['textDirection'] != null) {
+    document.getElementById('textDirection').value = config['textDirection'];
+}
     for (const p of config_values) {
         if(config[p] != null) document.getElementById(p).value = config[p];
     }
@@ -616,6 +623,7 @@
 
     // URLに付けるオプションの値をアップデート //////////
     function updateOptionValues(only_url=false) {
+        
         for (const p of config_values) {
             eval("var " + p + " = document.getElementById('" + p + "').value;");
         }
@@ -625,7 +633,7 @@
         var new_url = base_url + "textAlign=" + textAlign + "&v_align=" + v_align 
                      + "&recog=" + recog 
                      + "&bgcolor=" + bgcolor
-
+                     + "&textDirection=" + textDirection // 添加文字方向参数
                      + "&size1=" + size1 + "&weight1=" + weight1 + "&color1=" + color1
                      + "&st_color1=" + st_color1 + "&st_width1=" + st_width1
 

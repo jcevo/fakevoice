@@ -29,7 +29,7 @@
     </script>
     <!-- END: Google tag (gtag.js) -->
 
-    <title>jimakuChan: 音声認識字幕ちゃん [CONFIG]</title>
+    <title>字幕</title>
 
     <style type="text/css">
         button, input, select, textarea {
@@ -108,34 +108,34 @@
 <!-- <iframe src="" name="sample" width="100%" height="30%" id="asr_frame" onclick="toggleIframeHeight()"></iframe> -->
 <iframe src="" name="sample" width="100%" height="30%" id="asr_frame"></iframe>
 
-　上の画面をクリックすると設定画面が閉じ，もう一度押すと再度開きます．<BR>
+　点击上面的画面会关闭设置画面，再次点击则会重新打开。<BR>
 <HR>
 
 <!-- # 設定セーブ＆ロードボタン ################## -->
-　<button onclick="saveSettings()">設定ファイルをPCに保存</button>　
-<button onclick="loadSettings()">設定ファイルをブラウザに読込</button>　：設定が完成したら，設定ファイルを保存しておきましょう　<BR>
+　<button onclick="saveSettings()">将配置文件保存到PC</button>　
+<button onclick="loadSettings()">将配置文件加载到浏览器</button>　完成设置后保存　<BR>
 <HR>
 
 <!-- # API key text box ##################### -->
-翻訳用 Google API-KEY: <input type="text" name="gas_key" id="gas_key" size="60" oninput="updateOptionValues();" /> キーの作成方法 → <a target="_blank" href="http://www.sayonari.com/trans_asr/index_asr.html">[LINK]</a><BR>
-翻訳回数：<div id="displayTransCount" style="display: inline-block; _display: inline;"></div><font color="gray">（上限 無料：5,000回，有料：20,000回）←僕じゃなくてGoogle にお金払う</font><BR>
+翻译使用 Google API-KEY: <input type="text" name="gas_key" id="gas_key" size="60" oninput="updateOptionValues();" /> 制作方法 <a target="_blank" href="http://www.sayonari.com/trans_asr/index_asr.html">[LINK]</a><BR>
+免费翻译次数：<div id="displayTransCount" style="display: inline-block; _display: inline;"></div><font color="gray">（免费上限：5,000回，付费：20,000次）←请使用Google</font><BR>
 <HR>
 
 <!-- # 背景の色 ############################## -->
-　　　　文字色 フチ色<BR>
-認識　：<input id="color1" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,1); updateOptionValues(only_url=true)" />
+　　　　文字颜色 描边颜色<BR>
+识别文字　：<input id="color1" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,1); updateOptionValues(only_url=true)" />
 <input id="st_color1" type="color" value="#000000" oninput="changeTextColor('bg',this.value,1); updateOptionValues(only_url=true)" />
 
 　　背景色：<input id="bgcolor" type="color" value="#00ff00" oninput="document.getElementById('asr_frame').contentWindow.document.bgColor=this.value; changeTextColor('imb',this.value,1); updateOptionValues(only_url=true)" />
 
 <BR>
-翻訳１：<input id="color2" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,2); updateOptionValues(only_url=true)" />
+翻译１：<input id="color2" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,2); updateOptionValues(only_url=true)" />
 <input id="st_color2" type="color" value="#000000" oninput="changeTextColor('bg',this.value,2); updateOptionValues(only_url=true)" /><BR>
 
-翻訳２：<input id="color3" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,3); updateOptionValues(only_url=true)" />
+翻译２：<input id="color3" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,3); updateOptionValues(only_url=true)" />
 <input id="st_color3" type="color" value="#000000" oninput="changeTextColor('bg',this.value,3); updateOptionValues(only_url=true)" /><BR>
 
-翻訳３：<input id="color4" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,4); updateOptionValues(only_url=true)" />
+翻译３：<input id="color4" type="color" value="#ffffff" oninput="changeTextColor('fg',this.value,4); updateOptionValues(only_url=true)" />
 <input id="st_color4" type="color" value="#000000" oninput="changeTextColor('bg',this.value,4); updateOptionValues(only_url=true)" /><BR>
 
 <HR>
@@ -145,8 +145,8 @@
          -->
 
 <!-- # テキストサイズ ######################### -->
-　　　　　　　サイズ　　　　　　　ウェイト　　　　　　　 縁取り　<BR>
-認識　：
+　　　　　　　字体大小　　　　　　　粗细　　　　　　　 描边大小　<BR>
+识别文字　：
 <input id="size1" type="range" value="25" min="0" max="40" step="0.1" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('speech_text').style.fontSize = this.value + 'pt'; document.getElementById('text_size_view1').innerHTML=this.value; updateOptionValues(only_url=true)" />
 <span id="text_size_view1">25</span>px 
 
@@ -157,7 +157,7 @@
 <span id="text_st_size_view1">6</span>pt
 <BR>
 
-翻訳１：
+翻译１：
 <input id="size2" type="range" value="25" min="0" max="40" step="0.1" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text').style.fontSize = this.value + 'pt'; document.getElementById('text_size_view2').innerHTML=this.value; updateOptionValues(only_url=true)" />
 <span id="text_size_view2">25</span>px 
 
@@ -168,7 +168,7 @@
 <span id="text_st_size_view2">6</span>pt
 <BR>
 
-翻訳２：
+翻译２：
 <input id="size3" type="range" value="25" min="0" max="40" step="0.1" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text2').style.fontSize = this.value + 'pt'; document.getElementById('text_size_view3').innerHTML=this.value; updateOptionValues(only_url=true)" />
 <span id="text_size_view3">25</span>px 
 
@@ -179,7 +179,7 @@
 <span id="text_st_size_view3">6</span>pt
 <BR>
 
-翻訳３：
+翻译３：
 <input id="size4" type="range" value="25" min="0" max="40" step="0.1" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text3').style.fontSize = this.value + 'pt'; document.getElementById('text_size_view4').innerHTML=this.value; updateOptionValues(only_url=true)" />
 <span id="text_size_view4">25</span>px 
 
@@ -191,37 +191,40 @@
 <BR>
 
 <HR>
-<!-- # テキストの揃え ######################### -->
-テキストの位置：　
-左右：
+文本位置：　
+文字排列
+<select id="textDirection" onchange="updateOptionValues()">
+        <option value="vertical" selected>纵向排列</option>
+        <option value="horizontal">横向排列</option>
+</select>
+<!-- # 文本对齐 ######################### -->
+
+　水平对齐：
 <select id="textAlign" onchange="updateOptionValues()">
-    <option value="left">左寄せ</option>
-    <option value="center" selected>中央寄せ</option>
-    <option value="right">右寄せ</option>
+    <option value="left">左对齐</option>
+    <option value="center" selected>居中对齐</option>
+    <option value="right">右对齐</option>
 </select>
 
-　上下：
+　垂直对齐：
 <select id="v_align" onchange="updateOptionValues()">
     <option value="top" selected>上</option>
     <option value="bottom">下</option>
 </select><BR>
 
 <!-- # テキストの改行 ######################### -->
-テキストの改行：
+换行符：
 <select id="whiteSpace" onchange="updateOptionValues()">
-    <option value="nowrap">改行しない</option>
-    <option value="" selected>画面端で改行</option>
+    <option value="nowrap">无换行符</option>
+    <option value="" selected>显示在文字两边</option>
 </select><BR>
 <HR>
 
 <!-- # テキスト表示項目 ####################### -->
-音声認識言語　：
-<select id="recog" onchange="updateOptionValues(only_url=false);">
-    <option value="ja" selected>日本語</option>
-    <option value="en">英語</option>
-    <option value="ko">韓国語</option>
-    <option value="zh-CN">中国語</option>
-    <option value="zh-TW">台湾語</option>
+<!--
+    <option value="ja">日语</option>
+    <option value="ko">韩语</option>
+    <option value="zh-TW">中文台语</option>     
     <option value="fr">フランス語</option>
     <option value="it">イタリア語</option>
     <option value="de">ドイツ語</option>
@@ -237,10 +240,14 @@
     <option value="vi">ベトナム語</option>
     <option value="th">タイ語</option>
     <option value="ar">アラビア語</option>
-    <option value="so">ソマリ語</option>
+    <option value="so">ソマリ語</option>-->
+音频语言　：
+<select id="recog" onchange="updateOptionValues(only_url=false);">
+    <option value="zh-CN" selected>中文普通话</option>
+    <option value="en">英语</option>
 </select>　　
 
-フォント　：
+字体　：
 <select name="speech_text_font_selector" id="speech_text_font_selector" onchange="document.getElementById('asr_frame').contentWindow.document.getElementById('speech_text').style.fontFamily = this.value; selectFont();">
     <option value="direct">[直接指定]</option>
     <option value="M PLUS\ 1p">M PLUS 1p</option>
@@ -271,36 +278,17 @@
     <option value="Sawarabi Gothic">さわらびゴシック</option>
     <option value="Nico Moji">ニコモジ</option>
 </select>　
-フォント（直接指定）：<input type="text" name="speech_text_font" id="speech_text_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('speech_text').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
+（直接指定）：<input type="text" name="speech_text_font" id="speech_text_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('speech_text').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
 
 
-翻訳言語（１）：
+翻译语言（１）：
 <select id="trans" onchange="updateOptionValues(only_url=false);">
-    <option value="none">なし</option>
-    <option value="ja">日本語</option>
-    <option value="en" selected>英語</option>
-    <option value="ko">韓国語</option>
-    <option value="zh-CN">中国語</option>
-    <option value="zh-TW">台湾語</option>
-    <option value="fr">フランス語</option>
-    <option value="it">イタリア語</option>
-    <option value="de">ドイツ語</option>
-    <option value="tr">トルコ語</option>
-    <option value="sv">スウェーデン語</option>
-    <option value="pl">ポーランド語</option>
-    <option value="uk">ウクライナ語</option>
-    <option value="ru">ロシア語</option>
-    <option value="es">スペイン語</option>
-    <option value="pt">ポルトガル語</option>
-    <option value="nl">オランダ語</option>
-    <option value="id">インドネシア語</option>
-    <option value="vi">ベトナム語</option>
-    <option value="th">タイ語</option>
-    <option value="ar">アラビア語</option>
-    <option value="so">ソマリ語</option>
+    <option value="none" selected>不翻译</option>
+    <option value="zh-CN" >中文普通话</option>
+    <option value="en">英语</option>
 </select>　　
 
-フォント　：
+字体　：
 <select name="trans_text_font_selector" id="trans_text_font_selector" onchange="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text').style.fontFamily = this.value; selectFont();">
     <option value="direct">[直接指定]</option>
     <option value="M PLUS\ 1p">M PLUS 1p</option>
@@ -331,36 +319,17 @@
     <option value="Sawarabi Gothic">さわらびゴシック</option>
     <option value="Nico Moji">ニコモジ</option>
 </select>　
-フォント（直接指定）：<input type="text" name="trans_text_font" id="trans_text_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
+（直接指定）：<input type="text" name="trans_text_font" id="trans_text_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
 
 
-翻訳言語（２）：
+翻译语言（２）：
 <select id="trans2" onchange="updateOptionValues(only_url=false);">
-    <option value="none" selected>なし</option>
-    <option value="ja">日本語</option>
-    <option value="en">英語</option>
-    <option value="ko">韓国語</option>
-    <option value="zh-CN">中国語</option>
-    <option value="zh-TW">台湾語</option>
-    <option value="fr">フランス語</option>
-    <option value="it">イタリア語</option>
-    <option value="de">ドイツ語</option>
-    <option value="tr">トルコ語</option>
-    <option value="sv">スウェーデン語</option>
-    <option value="pl">ポーランド語</option>
-    <option value="uk">ウクライナ語</option>
-    <option value="ru">ロシア語</option>
-    <option value="es">スペイン語</option>
-    <option value="pt">ポルトガル語</option>
-    <option value="nl">オランダ語</option>
-    <option value="id">インドネシア語</option>
-    <option value="vi">ベトナム語</option>
-    <option value="th">タイ語</option>
-    <option value="ar">アラビア語</option>
-    <option value="so">ソマリ語</option>
+    <option value="none" selected>不翻译</option>
+    <option value="zh-CN" >中文普通话</option>
+    <option value="en">英语</option>
 </select>　　
 
-フォント　：
+字体　：
 <select name="trans_text2_font_selector" id="trans_text2_font_selector" onchange="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text2').style.fontFamily = this.value; selectFont();">
     <option value="direct">[直接指定]</option>
     <option value="M PLUS\ 1p">M PLUS 1p</option>
@@ -391,35 +360,16 @@
     <option value="Sawarabi Gothic">さわらびゴシック</option>
     <option value="Nico Moji">ニコモジ</option>
 </select>　
-フォント（直接指定）：<input type="text" name="trans_text2_font" id="trans_text2_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text2').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
+（直接指定）：<input type="text" name="trans_text2_font" id="trans_text2_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text2').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
 
-翻訳言語（３）：
+翻译语言（３）：
 <select id="trans3" onchange="updateOptionValues(only_url=false);">
-    <option value="none" selected>なし</option>
-    <option value="ja">日本語</option>
-    <option value="en">英語</option>
-    <option value="ko">韓国語</option>
-    <option value="zh-CN">中国語</option>
-    <option value="zh-TW">台湾語</option>
-    <option value="fr">フランス語</option>
-    <option value="it">イタリア語</option>
-    <option value="de">ドイツ語</option>
-    <option value="tr">トルコ語</option>
-    <option value="sv">スウェーデン語</option>
-    <option value="pl">ポーランド語</option>
-    <option value="uk">ウクライナ語</option>
-    <option value="ru">ロシア語</option>
-    <option value="es">スペイン語</option>
-    <option value="pt">ポルトガル語</option>
-    <option value="nl">オランダ語</option>
-    <option value="id">インドネシア語</option>
-    <option value="vi">ベトナム語</option>
-    <option value="th">タイ語</option>
-    <option value="ar">アラビア語</option>
-    <option value="so">ソマリ語</option>
+    <option value="none" selected>不翻译</option>
+    <option value="zh-CN" >中文普通话</option>
+    <option value="en">英语</option>
 </select>　　
 
-フォント　：
+字体　：
 <select name="trans_text3_font_selector" id="trans_text3_font_selector" onchange="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text3').style.fontFamily = this.value; selectFont();">
     <option value="direct">[直接指定]</option>
     <option value="M PLUS\ 1p">M PLUS 1p</option>
@@ -450,63 +400,28 @@
     <option value="Sawarabi Gothic">さわらびゴシック</option>
     <option value="Nico Moji">ニコモジ</option>
 </select>　
-フォント（直接指定）：<input type="text" name="trans_text3_font" id="trans_text3_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text3').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
+（直接指定）：<input type="text" name="trans_text3_font" id="trans_text3_font" size="30" oninput="document.getElementById('asr_frame').contentWindow.document.getElementById('trans_text3').style.fontFamily = this.value; updateOptionValues();" disabled /><br>
 
 <HR>
 
-<!-- # テキスト表示を●秒後に消す ######################### -->
-何ミリ秒後に文を消す？　　　：　
-<input type="text" name="timer" id="timer" size="10" oninput="updateOptionValues();" />ミリ秒（半角数字で入れてね．1000ミリ秒 = 1秒）<BR>
+<!-- # 在●秒后隐藏文本######################### -->
+在多少毫秒后文本消失　　　：　
+<input type="text" name="timer" id="timer" size="10" oninput="updateOptionValues();" />1秒=1000毫秒<BR>
 
-<!-- # 文の終わり ######################### -->
-何ミリ秒黙ったら文を区切る？：　
-<input type="text" name="short_pause" value="750" id="short_pause" size="10" oninput="updateOptionValues();" />ミリ秒（半角数字で入れてね．1000ミリ秒 = 1秒）<BR>
-（500：すぐ切る｜750：普通｜1000：つなぐ　調整して．何も入れないと，これまでと同じ動作になる．）<BR>
+<!-- # 文末 ######################### -->
+说话间隔时间（毫秒）：　
+<input type="text" name="short_pause" value="750" id="short_pause" size="10" oninput="updateOptionValues();" />1秒=1000毫秒<BR>
+根据自己的场景设置：<BR>如直播带货场景，语速比较快，一次性说话内容比较长，可以设置20秒<BR>如情感聊天场景，语速比较慢，可以设置为10秒<BR>
 <HR>
 
 
 <!-- # 棒読みちゃん連携 ######################### -->
 - 棒読みちゃん連携を使う：<input type="checkbox" id="bouyomi" onchange="updateOptionValues()"> ← 使う場合チェック入れる．詳細 → <a target="_blank" href="https://twitter.com/sayonari/status/1386937837682003968">twitter</a><BR>
-<!-- # センシティブワード対応する！ ######################### -->
-- センシティブワード対応（***に置き換え）を<font color="red">やめる</font>：<input type="checkbox" id="anti_sexual" onchange="updateOptionValues()"> <BR>
-<HR>
-
-<!-- # URL view & copy button ############### -->
-<!-- URL :  -->
-<!-- <textarea name="url" id="url" rows="7" cols="90"></textarea><BR> -->
-<!-- 　　　<input type="button" value="copy to clipboard" id="textarea_copy" onclick="document.getElementsByTagName('textarea')[0].select();document.execCommand('copy');"> -->
-<!-- 　<a id="open_link" target="_self" href="">[同じタブで開く]</a><BR>
-別窓で開くと２つ起動して両方止まるよ！多重起動しないように気をつけて！<BR> -->
-<!-- <HR> -->
-
-<!-- # .bat download ボタン ############################## -->
-.bat ファイル生成：<BR>
-これ使ったら，<font color="red">全画面ゲームしてても止まらない！</font>詳しくはこちら→（<a target="_blank" href="https://www.youtube.com/watch?v=8-UXx_tVeYk">解説動画</a>）<BR>
-.batファイルと，設定ファイルをダウンロードしてください．<BR>
-
-<table border="1" style="width: auto;"><tr><td>
-<table style="width: auto;">
-    <tr>
-        <td width="180">Windowsの人：</td>
-        <td><button onclick="generateBatFile('win')">Windows用 起動 .batファイル生成</button></td>
-        <td><button onclick="saveSettings()">設定ファイルをPCに保存</button></td>
-    </tr>
-</tr>
-</table>
-</td></tr></table>
-<BR>
     
-<table border="1" style="width: auto;"><tr><td>
-<table style="width: auto;">
-    <tr>
-        <td width="180">Macの人：</td>
-        <td><button onclick="generateBatFile('mac')">Mac用 起動 .commandファイル生成</button></td>
-        <td><button onclick="saveSettings()">設定ファイルをPCに保存</button></td>
-    </tr>
-</table>
-</td></tr></table>
-
+<!-- # センシティブワード対応する！ ######################### -->
+- 敏感词替换为(***)<font color="red">停止替换</font>：<input type="checkbox" id="anti_sexual" onchange="updateOptionValues()"> <BR>
 <HR>
+
 
 <!-- # dummy 見えない数字 ############################## -->
 <input style="display: none;" type="text" name="frame_height" id="frame_height" value="30%" size="10" oninput="updateOptionValues();" />
@@ -536,7 +451,7 @@
 
 
     // config 値　一覧 ////////////////
-    config_values = ["gas_key", "textAlign", "v_align", "whiteSpace", "bgcolor", "frame_height"
+    config_values = ["gas_key", "textDirection","textAlign", "v_align", "whiteSpace", "bgcolor", "frame_height"
         , "recog", "size1", "weight1", "color1", "st_color1", "st_width1"
         , "trans", "size2", "weight2", "color2", "st_color2", "st_width2"
         , "trans2", "size3", "weight3", "color3", "st_color3", "st_width3"
@@ -553,6 +468,9 @@
 
     // 設定の復元 ////////////////////
     const config = JSON.parse(localStorage.jimakuChan_config || '{}');
+    if(config['textDirection'] != null) {
+    document.getElementById('textDirection').value = config['textDirection'];
+}
     for (const p of config_values) {
         if(config[p] != null) document.getElementById(p).value = config[p];
     }
@@ -616,6 +534,7 @@
 
     // URLに付けるオプションの値をアップデート //////////
     function updateOptionValues(only_url=false) {
+        
         for (const p of config_values) {
             eval("var " + p + " = document.getElementById('" + p + "').value;");
         }
@@ -625,7 +544,7 @@
         var new_url = base_url + "textAlign=" + textAlign + "&v_align=" + v_align 
                      + "&recog=" + recog 
                      + "&bgcolor=" + bgcolor
-
+                     + "&textDirection=" + textDirection // 添加文字方向参数
                      + "&size1=" + size1 + "&weight1=" + weight1 + "&color1=" + color1
                      + "&st_color1=" + st_color1 + "&st_width1=" + st_width1
 
